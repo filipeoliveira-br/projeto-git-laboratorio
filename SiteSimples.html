@@ -7,13 +7,14 @@
     <style>
         /* Estilos básicos em CSS */
         body {
-            background-color: #881414; /* Fundo branco */
-            color: #000000;            /* Fonte preta */
+            background-color: #881414; /* Fundo vinho original */
+            color: #ffffff;            /* Fonte branca para contraste com fundo escuro */
             font-family: Arial, sans-serif; /* Fonte Arial */
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
             line-height: 1.6;
+            transition: background-color 0.4s ease, color 0.4s ease;
         }
 
         h1 {
@@ -30,13 +31,92 @@
             height: auto;
             display: block;
             margin: 0 auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        /* Estilos do Menu Interativo */
+        nav {
+            background-color: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
+            border-radius: 8px;
+            padding: 12px 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav button {
+            background-color: #ffffff;
+            color: #333333;
+            border: none;
+            padding: 10px 18px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+
+        nav button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            background-color: #f0f0f0;
+        }
+
+        .btn-bege {
+            background-color: #f5f5dc !important;
+            color: #333333 !important;
+        }
+
+        .btn-sair {
+            background-color: #d9534f !important;
+            color: #ffffff !important;
+        }
+
+        .btn-sair:hover {
+            background-color: #c9302c !important;
+        }
+
+        /* Mensagem de Feedback de Status */
+        #status-msg {
+            display: none;
+            text-align: center;
+            padding: 12px;
+            margin: 15px 0;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            font-weight: bold;
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
     </style>
 </head>
 <body>
 
+    <!-- Menu Interativo -->
+    <nav>
+        <ul>
+            <li><button onclick="iniciar()">Iniciar</button></li>
+            <li><button class="btn-bege" onclick="mudarFundoBege()">Fundo Bege</button></li>
+            <li><button onclick="mudarFundoOriginal()">Fundo Original</button></li>
+            <li><button class="btn-sair" onclick="sair()">Sair</button></li>
+        </ul>
+    </nav>
+
     <!-- Título -->
     <h1>Trabalho Coding</h1>
+
+    <!-- Caixa para exibir alertas/mensagens do menu -->
+    <div id="status-msg"></div>
 
     <!-- Texto introdutório -->
     <p>
@@ -53,5 +133,51 @@
         Esta página html foi feita com auxílio de IA para otimização de tempo e focar no controle de versionamento. Aqui, será observado as alterações que serão apresentadas de acordo com o controle de versionamento.
     </p>
 
+    <script>
+        // Função do botão Iniciar
+        function iniciar() {
+            const msg = document.getElementById('status-msg');
+            msg.style.display = 'block';
+            msg.innerHTML = '🚀 Sessão iniciada! Pronto para acompanhar o versionamento no Git/GitHub.';
+        }
+
+        // Função para alterar a cor de fundo para Bege
+        function mudarFundoBege() {
+            document.body.style.backgroundColor = '#F5F5DC';
+            document.body.style.color = '#000000';
+            const msg = document.getElementById('status-msg');
+            msg.style.display = 'block';
+            msg.style.backgroundColor = 'rgba(0, 0, 0, 0.08)';
+            msg.style.borderColor = 'rgba(0, 0, 0, 0.2)';
+            msg.innerHTML = '🎨 Cor de fundo alterada para Bege!';
+        }
+
+        // Função para restaurar o fundo original (Vinho)
+        function mudarFundoOriginal() {
+            document.body.style.backgroundColor = '#881414';
+            document.body.style.color = '#ffffff';
+            const msg = document.getElementById('status-msg');
+            msg.style.display = 'block';
+            msg.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
+            msg.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+            msg.innerHTML = '🔄 Cor de fundo restaurada para o vinho original!';
+        }
+
+        // Função do botão Sair
+        function sair() {
+            const msg = document.getElementById('status-msg');
+            msg.style.display = 'block';
+            msg.innerHTML = '👋 Você encerrou a sessão. Atualize a página se desejar reiniciar.';
+            setTimeout(() => {
+                document.body.innerHTML = `
+                    <div style="text-align: center; margin-top: 80px; padding: 20px;">
+                        <h1>Sessão Encerrada</h1>
+                        <p>Obrigado por utilizar o sistema de controle de versionamento.</p>
+                        <button onclick="location.reload()" style="padding: 10px 20px; font-size: 16px; border-radius: 6px; cursor: pointer; border: none; background-color: #ffffff; font-weight: bold; margin-top: 15px;">Recarregar Página</button>
+                    </div>
+                `;
+            }, 800);
+        }
+    </script>
 </body>
 </html>
